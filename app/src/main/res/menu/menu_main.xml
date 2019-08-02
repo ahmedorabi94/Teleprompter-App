@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.test.orabi.teleprompter.view.MainActivity">
+    <item
+        android:id="@+id/insert_dummy_data"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/delete_all_data"
+        android:orderInCategory="101"
+        android:title="@string/delete_all_texts"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/settings_item"
+        android:title="@string/settings"
+        app:showAsAction="never"
+        android:orderInCategory="102"
+        />
+</menu>

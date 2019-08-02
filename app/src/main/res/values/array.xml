@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    ////////////text colors////////////////////////////
+    <string-array name="TextColorsName">
+        <item>White</item>
+        <item>Black</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Gray</item>
+        <item>Dark Orange</item>
+        <item>Indigo</item>
+        <item>Purple</item>
+        <item>Brown</item>
+    </string-array>
+
+    <string-array name="TextColorsValues">
+        <item>#ffffff</item>
+        <item>#000000</item>
+        <item>#ff0000</item>
+        <item>#00FF00</item>
+        <item>#0000FF</item>
+        <item>#FFFF00</item>
+        <item>#ff9e9e9e</item>
+        <item>#FF8C00</item>
+        <item>#4B0082</item>
+        <item>#800080</item>
+        <item>#8B4513</item>
+    </string-array>
+
+    ////////////text colors////////////////////////////
+
+
+    <!--<string-array name="background_color_list">-->
+        <!--<item>White</item>-->
+        <!--<item>Black</item>-->
+    <!--</string-array>-->
+
+    <!--<string-array name="background_color_values">-->
+        <!--<item>#ffffff</item>-->
+        <!--<item>#000000</item>-->
+    <!--</string-array>-->
+
+</resources>

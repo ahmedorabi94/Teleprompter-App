@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.test.orabi.teleprompter">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/teleicon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        >
+        <activity
+            android:name="com.test.orabi.teleprompter.view.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.test.orabi.teleprompter.view.AddTextActivity"
+            android:label="Edit Text"
+            android:parentActivityName="com.test.orabi.teleprompter.view.MainActivity" />
+
+        <provider
+            android:name="com.test.orabi.teleprompter.model.db.TeleProvider"
+            android:authorities="com.test.orabi.teleprompter"
+            android:exported="false" />
+
+        <activity android:name="com.test.orabi.teleprompter.view.ScrollTextActivity"
+
+            />
+        <activity
+            android:name="com.test.orabi.teleprompter.view.SettingsActivity"
+            android:label="Settings"
+            android:parentActivityName="com.test.orabi.teleprompter.view.MainActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name="com.test.orabi.teleprompter.view.DisplayVideoActivity"
+            android:parentActivityName="com.test.orabi.teleprompter.view.MainActivity" />
+
+    </application>
+
+</manifest>

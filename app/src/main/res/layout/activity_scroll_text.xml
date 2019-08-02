@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".85"
+            android:orientation="horizontal">
+
+            <com.test.orabi.teleprompter.view.VerticalMarquee
+                android:id="@+id/vmTextView"
+                android:layout_width="310dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:textColor="@color/grey_font"
+                android:textSize="35sp"
+                android:textStyle="normal" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_viewSurface"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <SurfaceView
+                        android:id="@+id/surface_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true" />
+
+                    <TextView
+                        android:id="@+id/tv_timer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="20dp"
+                        android:textColor="@color/white" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".15"
+            android:orientation="vertical"
+            app:cardBackgroundColor="@color/colorPrimaryDark"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="10dp">
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/SaveFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="150dp"
+                android:src="@drawable/ic_check_white_36dp"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/SubFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="25dp"
+                android:src="@drawable/ic_minus_white_36dp"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini" />
+
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="start|bottom"
+                android:layout_marginStart="67dp"
+                android:layout_marginBottom="3dp"
+                android:contentDescription="@string/font_size_icon"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_format_size_white_36dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/AddFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="95dp"
+                android:src="@drawable/ic_plus_white_36dp"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="150dp"
+                android:contentDescription="@string/run_slow_image"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_run_white_36dp" />
+
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="147dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginStart="168dp"
+                android:layout_marginTop="1.5dp"
+                android:max="5" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="303dp"
+                android:contentDescription="@string/run_fast_image"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_run_fast_white_36dp" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/record_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="90dp"
+                android:src="@drawable/ic_play_white_36dp"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/StopFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="30dp"
+                android:src="@drawable/ic_stop_circle_white_36dp"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini" />
+
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+
+</layout>
+

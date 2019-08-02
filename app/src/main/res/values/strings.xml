@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Lite Teleprompter</string>
+    <string name="action_settings">Insert Dummy Data</string>
+    <string name="add_title">Add title</string>
+    <string name="add_some_text_here">Add Some Text Here</string>
+    <string name="delete_all_texts">Delete All Texts</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="some_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="there_is_no_text_found_add_some_text">Add New Text (+)</string>
+    <string name="head">Head</string>
+    <string name="info">Info</string>
+    <string name="lores_ipsum">Lorem Ipsum</string>
+    <string name="add_text">Add Text</string>
+    <string name="import_text">Import Text</string>
+    <string name="put_title">put title here</string>
+    <string name="record">Record</string>
+    <string name="settings">Settings</string>
+    <string name="share_item">Share</string>
+    <string name="try_again">Try Again</string>
+    <string name="share">Share</string>
+    <string name="restart">Restart</string>
+    <string name="send">Send To</string>
+    <string name="delete_btn">Delete</string>
+    <string name="save_btn">Save</string>
+    <string name="play_button">play button</string>
+    <string name="empty_icon">empty icon</string>
+    <string name="font_size_icon">Font Size Icon</string>
+    <string name="run_fast_image">Run Fast Image</string>
+    <string name="run_slow_image">Run Slow Image</string>
+    <string name="camera_permission">Need Camera Permission</string>
+</resources>
