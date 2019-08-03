@@ -32,10 +32,6 @@
             android:label="Edit Text"
             android:parentActivityName="com.test.orabi.teleprompter.view.MainActivity" />
 
-        <provider
-            android:name="com.test.orabi.teleprompter.model.db.TeleProvider"
-            android:authorities="com.test.orabi.teleprompter"
-            android:exported="false" />
 
         <activity android:name="com.test.orabi.teleprompter.view.ScrollTextActivity"
 

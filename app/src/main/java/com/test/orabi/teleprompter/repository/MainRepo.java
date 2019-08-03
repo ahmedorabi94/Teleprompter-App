@@ -3,7 +3,6 @@ package com.test.orabi.teleprompter.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 
 import com.test.orabi.teleprompter.AppExecutors;
 import com.test.orabi.teleprompter.R;
@@ -15,12 +14,10 @@ import java.util.List;
 
 public class MainRepo {
 
-    private Application application;
+    private Application mApplication;
     private AppExecutors appExecutors;
     private TeleDao teleDao;
-
-    private MediatorLiveData<List<Tele>> mediatorLiveData;
-
+    private LiveData<List<Tele>> allTeleLiveData;
     private static MainRepo repo;
 
 
@@ -33,44 +30,34 @@ public class MainRepo {
     }
 
 
-
-    public MainRepo(Application application) {
-        this.application = application;
-        this.appExecutors = new AppExecutors();
-        this.teleDao = AppDatabase.getInstance(application).teleDao();
-        this.mediatorLiveData = new MediatorLiveData<>();
+    private MainRepo(Application application) {
+        mApplication = application;
+        appExecutors = new AppExecutors();
+        teleDao = AppDatabase.getInstance(mApplication).teleDao();
         getAllTeles();
 
     }
 
     private void getAllTeles() {
-        mediatorLiveData.addSource(teleDao.getAllTeles(),teles -> mediatorLiveData.setValue(teles));
-
+        allTeleLiveData = teleDao.getAllTeles();
     }
 
     public void deleteAllTeles() {
-
         appExecutors.diskIO().execute(teleDao::deleteAllTeles);
-
-        mediatorLiveData.addSource(teleDao.getAllTeles(), teles -> mediatorLiveData.setValue(teles));
 
     }
 
 
     public void insertDummyTele() {
-
-        Tele tele = new Tele(application.getString(R.string.lores_ipsum), application.getString(R.string.some_text));
+        Tele tele = new Tele(mApplication.getString(R.string.lores_ipsum), mApplication.getString(R.string.some_text));
 
         appExecutors.diskIO().execute(() -> teleDao.insert(tele));
-
-        mediatorLiveData.addSource(teleDao.getAllTeles(), teles -> mediatorLiveData.setValue(teles));
-
 
     }
 
 
     public LiveData<List<Tele>> getAsLiveData() {
-        return mediatorLiveData;
+        return allTeleLiveData;
     }
 
 }

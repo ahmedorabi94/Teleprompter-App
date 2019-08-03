@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupMenu;
@@ -33,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     private List<Tele> teleList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,19 +54,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
 
-
-
-
-
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        Log.e("onStart" , "onStart");
-
         viewModel.getAllTelesLiveData().observe(this, teles -> {
             teleAdapter = new TeleAdapter(MainActivity.this, teles);
             binding.listView.setAdapter(teleAdapter);
@@ -75,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
 
     }
+
 
     private void openFileManger() {
         Intent intent = null;

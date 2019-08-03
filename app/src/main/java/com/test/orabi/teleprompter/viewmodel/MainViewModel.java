@@ -34,7 +34,6 @@ public class MainViewModel extends AndroidViewModel {
         super(application);
         this.application = application;
         repo = MainRepo.getInstance(application);
-
         allTelesLiveData = repo.getAsLiveData();
 
 
@@ -42,15 +41,11 @@ public class MainViewModel extends AndroidViewModel {
 
 
     public void deleteAllTeles() {
-
         repo.deleteAllTeles();
     }
 
     public void insertDummyTele() {
-
         repo.insertDummyTele();
-
-
     }
 
 

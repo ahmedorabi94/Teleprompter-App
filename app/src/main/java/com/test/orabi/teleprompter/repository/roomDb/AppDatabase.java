@@ -13,14 +13,14 @@ import com.test.orabi.teleprompter.repository.data.Tele;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TeleDao teleDao();
+
     private static AppDatabase appDatabase;
 
 
     // Singleton Pattern
+    public static synchronized AppDatabase getInstance(Application application) {
 
-    public static AppDatabase getInstance(Application application) {
-
-        if (appDatabase == null){
+        if (appDatabase == null) {
             appDatabase = Room.databaseBuilder(application, AppDatabase.class, "tele.db")
                     .fallbackToDestructiveMigration()
                     .build();
