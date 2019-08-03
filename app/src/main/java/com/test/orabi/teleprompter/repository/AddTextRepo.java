@@ -3,7 +3,6 @@ package com.test.orabi.teleprompter.repository;
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 
 import com.test.orabi.teleprompter.AppExecutors;
 import com.test.orabi.teleprompter.repository.data.Tele;
@@ -15,8 +14,7 @@ public class AddTextRepo {
     private AppExecutors appExecutors;
     private static AddTextRepo repo;
     private TeleDao teleDao;
-    private MediatorLiveData<Tele> mediatorLiveData;
-
+    private LiveData<Tele> teleLiveData;
 
 
     public static AddTextRepo getInstance(Application application) {
@@ -26,30 +24,24 @@ public class AddTextRepo {
         return repo;
     }
 
-    public AddTextRepo(Application application) {
-        this.appExecutors = new AppExecutors();
-        this.teleDao = AppDatabase.getInstance(application).teleDao();
-        this.mediatorLiveData = new MediatorLiveData<>();
+    private AddTextRepo(Application application) {
+        appExecutors = new AppExecutors();
+        teleDao = AppDatabase.getInstance(application).teleDao();
     }
 
 
     public void getTele(int id) {
-        mediatorLiveData.addSource(teleDao.getTele(id),tele -> mediatorLiveData.setValue(tele));
-      //  return teleDao.getTele(id);
-
+        teleLiveData = teleDao.getTele(id);
     }
 
 
     public void insertNewTele(String title, String body) {
         Tele tele = new Tele(title, body);
-
         appExecutors.diskIO().execute(() -> teleDao.insert(tele));
-
     }
 
     public void deleteTele(int id) {
         appExecutors.diskIO().execute(() -> teleDao.deleteTele(id));
-
     }
 
     public int updateTele(int id, String title, String body) {
@@ -58,8 +50,8 @@ public class AddTextRepo {
         return rowId[0];
     }
 
-    public LiveData<Tele> getAsLiveData(){
-        return mediatorLiveData;
+    public LiveData<Tele> getAsLiveData() {
+        return teleLiveData;
     }
 
 
