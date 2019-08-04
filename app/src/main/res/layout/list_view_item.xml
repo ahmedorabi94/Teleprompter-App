@@ -1,45 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:layout_margin="17dp"
-    android:descendantFocusability="blocksDescendants"
-    android:foreground="@drawable/ripple"
-    app:cardBackgroundColor="@color/colorPrimaryDark"
-    app:cardCornerRadius="2dp">
 
-    <LinearLayout
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.test.orabi.teleprompter.repository.data.Tele" />
+
+        <variable
+            name="callback"
+            type="com.test.orabi.teleprompter.view.adapter.TeleCallBack" />
+
+
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="6dp"
         android:descendantFocusability="blocksDescendants"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:foreground="@drawable/ripple"
+        android:onClick="@{() -> callback.onTeleClick(item)}"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
+        app:cardCornerRadius="2dp">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/head"
-            android:textAppearance="?android:textAppearanceMedium"
-            android:textColor="@color/white"
-            tools:targetApi="jelly_bean" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical"
+            android:padding="15dp">
 
-        <TextView
-            android:id="@+id/tv_body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="sans-serif"
-            android:maxLines="4"
-            android:text="@string/info"
-            android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@color/grey_font"
-            tools:targetApi="jelly_bean" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="@{item.title}"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
+                tools:targetApi="jelly_bean" />
+
+            <TextView
+                android:id="@+id/tv_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:maxLines="4"
+                android:text="@{item.body}"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/grey_font"
+                tools:targetApi="jelly_bean" />
+        </LinearLayout>
 
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>

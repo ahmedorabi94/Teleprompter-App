@@ -48,6 +48,11 @@ public class MainViewModel extends AndroidViewModel {
         repo.insertDummyTele();
     }
 
+    public void deleteTele(int id){
+        repo.deleteTele(id);
+    }
+
+
 
     public String readTextFromUri(Uri uri) throws IOException {
         InputStream inputStream = application.getContentResolver().openInputStream(uri);

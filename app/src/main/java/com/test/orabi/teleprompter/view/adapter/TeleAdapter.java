@@ -1,47 +1,73 @@
 package com.test.orabi.teleprompter.view.adapter;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.orabi.teleprompter.R;
+import com.test.orabi.teleprompter.databinding.ListViewItemBinding;
 import com.test.orabi.teleprompter.repository.data.Tele;
 
 import java.util.List;
 
-public class TeleAdapter extends ArrayAdapter<Tele> {
+public class TeleAdapter extends ListAdapter<Tele,TeleAdapter.MyViewHolder> {
 
-    private Context mContext;
-    private List<Tele> teles;
+    private TeleCallBack mCallback;
 
-    public TeleAdapter(Context context, List<Tele> teles) {
-        super(context, 0, teles);
-        this.mContext = context;
-        this.teles = teles;
+    public TeleAdapter(TeleCallBack callBack) {
+        super(DIFF_CALLBACK);
+        this.mCallback =callBack;
     }
+
+    private static final DiffUtil.ItemCallback<Tele> DIFF_CALLBACK = new DiffUtil.ItemCallback<Tele>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Tele oldItem, @NonNull Tele newItem) {
+            return oldItem.getId() == newItem.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Tele oldItem, @NonNull Tele newItem) {
+            return oldItem.getTitle().equals(newItem.getTitle()) &&
+                    oldItem.getBody().equals(newItem.getBody());
+        }
+    };
 
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        Tele tele = teles.get(position);
+        ListViewItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.list_view_item
+                , parent, false);
+        binding.setCallback(mCallback);
 
-        @SuppressLint("ViewHolder") View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view_item, parent, false);
+        return new MyViewHolder(binding);
+    }
 
-        TextView tv_title = view.findViewById(R.id.tv_title);
-        TextView tv_body = view.findViewById(R.id.tv_body);
-        tv_title.setText(tele.getTitle());
-        tv_body.setText(tele.getBody());
+    @Override
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        holder.mBinding.setItem(getItem(position));
+        holder.mBinding.executePendingBindings();
+    }
 
-        return view;
+
+    public Tele getTele(int position) {
+        return getItem(position);
+    }
+
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        private ListViewItemBinding mBinding;
+
+        MyViewHolder(ListViewItemBinding binding) {
+            super(binding.getRoot());
+            this.mBinding = binding;
+        }
     }
 
 

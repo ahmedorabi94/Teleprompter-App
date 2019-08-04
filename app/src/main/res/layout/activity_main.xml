@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,13 +9,12 @@
         android:background="@color/black"
         android:padding="5dp">
 
-        <ListView
-            android:id="@+id/list_view"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="2dp"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="7dp" />
+            tools:listitem="@layout/list_view_item" />
 
         <!-- Empty view for the list -->
         <RelativeLayout

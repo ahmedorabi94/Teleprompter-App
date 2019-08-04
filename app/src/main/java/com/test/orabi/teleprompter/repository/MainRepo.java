@@ -47,6 +47,10 @@ public class MainRepo {
 
     }
 
+    public void deleteTele(int id) {
+        appExecutors.diskIO().execute(() -> teleDao.deleteTele(id));
+    }
+
 
     public void insertDummyTele() {
         Tele tele = new Tele(mApplication.getString(R.string.lores_ipsum), mApplication.getString(R.string.some_text));

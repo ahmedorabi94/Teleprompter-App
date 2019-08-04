@@ -6,23 +6,27 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.PopupMenu;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.test.orabi.teleprompter.R;
 import com.test.orabi.teleprompter.databinding.ActivityMainBinding;
 import com.test.orabi.teleprompter.repository.data.Tele;
 import com.test.orabi.teleprompter.view.adapter.TeleAdapter;
+import com.test.orabi.teleprompter.view.adapter.TeleCallBack;
 import com.test.orabi.teleprompter.viewmodel.MainViewModel;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
+public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, TeleCallBack {
 
 
     private static final int REQUEST_CODE = 100;
@@ -30,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private ActivityMainBinding binding;
     private MainViewModel viewModel;
 
-
-    private List<Tele> teleList = new ArrayList<>();
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,28 +42,53 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        binding.listView.setEmptyView(binding.emptyView);
+        initRecyclerView();
+
+        teleAdapter = new TeleAdapter(this);
+        recyclerView.setAdapter(teleAdapter);
 
 
         binding.fab.setOnClickListener(view -> viewModel.showPopup(binding.fab, MainActivity.this));
-
-        binding.listView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent intent = new Intent(MainActivity.this, AddTextActivity.class);
-            intent.putExtra("row_id", teleList.get(position).getId());
-            MainActivity.this.startActivity(intent);
-        });
 
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
 
         viewModel.getAllTelesLiveData().observe(this, teles -> {
-            teleAdapter = new TeleAdapter(MainActivity.this, teles);
-            binding.listView.setAdapter(teleAdapter);
-            teleList = teles;
+
+            if (teles.size() == 0) {
+                binding.emptyView.setVisibility(View.VISIBLE);
+            } else {
+                binding.emptyView.setVisibility(View.GONE);
+            }
+
+            teleAdapter.submitList(teles);
+
+
         });
 
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT
+                | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                viewModel.deleteTele(teleAdapter.getTele(viewHolder.getAdapterPosition()).getId());
+            }
+        }).attachToRecyclerView(recyclerView);
+
+
+    }
+
+    private void initRecyclerView() {
+        recyclerView = binding.recyclerView;
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
@@ -155,4 +183,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
 
+    @Override
+    public void onTeleClick(Tele tele) {
+        Intent intent = new Intent(MainActivity.this, AddTextActivity.class);
+        intent.putExtra("row_id", tele.getId());
+        MainActivity.this.startActivity(intent);
+    }
 }
