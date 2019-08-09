@@ -1,6 +1,12 @@
 # Teleprompter-App
 
 
+## Libraries
+ - Data Binding
+ - View Models
+ - Dagger 2
+ - Romm Databse
+
 
 
 # ScreenShots
