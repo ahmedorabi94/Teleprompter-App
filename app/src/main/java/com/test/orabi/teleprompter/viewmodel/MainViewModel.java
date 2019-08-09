@@ -21,6 +21,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class MainViewModel extends AndroidViewModel {
 
     private Application application;
@@ -30,10 +32,11 @@ public class MainViewModel extends AndroidViewModel {
     private MainRepo repo;
 
 
-    public MainViewModel(@NonNull Application application) {
+    @Inject
+    public MainViewModel(@NonNull Application application, MainRepo mainRepo) {
         super(application);
         this.application = application;
-        repo = MainRepo.getInstance(application);
+        repo = mainRepo;
         allTelesLiveData = repo.getAsLiveData();
 
 
@@ -48,10 +51,9 @@ public class MainViewModel extends AndroidViewModel {
         repo.insertDummyTele();
     }
 
-    public void deleteTele(int id){
+    public void deleteTele(int id) {
         repo.deleteTele(id);
     }
-
 
 
     public String readTextFromUri(Uri uri) throws IOException {

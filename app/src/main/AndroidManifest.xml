@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.test.orabi.teleprompter">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -10,13 +9,13 @@
 
 
     <application
+        android:name=".TeleApp"
         android:allowBackup="true"
         android:icon="@drawable/teleicon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.test.orabi.teleprompter.view.MainActivity"
             android:label="@string/app_name"

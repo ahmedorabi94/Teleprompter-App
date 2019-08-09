@@ -11,6 +11,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.io.File;
 
+import javax.inject.Inject;
+
 public class DisplayVidoeViewModel extends AndroidViewModel {
 
     private Application mApplication;
@@ -20,6 +22,7 @@ public class DisplayVidoeViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isVideoFound = new MutableLiveData<>();
 
 
+    @Inject
     public DisplayVidoeViewModel(@NonNull Application application) {
         super(application);
 

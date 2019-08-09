@@ -11,6 +11,8 @@ import androidx.lifecycle.Transformations;
 import com.test.orabi.teleprompter.repository.AddTextRepo;
 import com.test.orabi.teleprompter.repository.data.Tele;
 
+import javax.inject.Inject;
+
 public class AddTextViewModel extends AndroidViewModel {
 
     private final LiveData<Tele> teleLiveData;
@@ -19,9 +21,10 @@ public class AddTextViewModel extends AndroidViewModel {
     private MutableLiveData<Integer> mId = new MutableLiveData<>();
 
 
-    public AddTextViewModel(@NonNull Application application) {
+    @Inject
+    public AddTextViewModel(@NonNull Application application , AddTextRepo repo) {
         super(application);
-        repo = AddTextRepo.getInstance(application);
+        this.repo = repo;
         teleLiveData = Transformations.switchMap(mId,id ->
                 repo.getAsLiveData()
                 );

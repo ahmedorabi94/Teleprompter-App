@@ -12,6 +12,7 @@ import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +27,10 @@ import com.test.orabi.teleprompter.viewmodel.MainViewModel;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener, TeleCallBack {
 
 
@@ -36,11 +41,17 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private RecyclerView recyclerView;
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
+        AndroidInjection.inject(this);
 
         initRecyclerView();
 
@@ -51,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         binding.fab.setOnClickListener(view -> viewModel.showPopup(binding.fab, MainActivity.this));
 
 
-        viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(MainViewModel.class);
 
 
         viewModel.getAllTelesLiveData().observe(this, teles -> {

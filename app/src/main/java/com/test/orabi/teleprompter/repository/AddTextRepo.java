@@ -1,32 +1,26 @@
 package com.test.orabi.teleprompter.repository;
 
-import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 
 import com.test.orabi.teleprompter.AppExecutors;
 import com.test.orabi.teleprompter.repository.data.Tele;
-import com.test.orabi.teleprompter.repository.roomDb.AppDatabase;
 import com.test.orabi.teleprompter.repository.roomDb.TeleDao;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class AddTextRepo {
 
     private AppExecutors appExecutors;
-    private static AddTextRepo repo;
     private TeleDao teleDao;
     private LiveData<Tele> teleLiveData;
 
 
-    public static AddTextRepo getInstance(Application application) {
-        if (repo == null) {
-            repo = new AddTextRepo(application);
-        }
-        return repo;
-    }
-
-    private AddTextRepo(Application application) {
-        appExecutors = new AppExecutors();
-        teleDao = AppDatabase.getInstance(application).teleDao();
+    @Inject
+    public AddTextRepo(TeleDao teleDao, AppExecutors appExecutors) {
+        this.appExecutors = appExecutors;
+        this.teleDao = teleDao;
     }
 
 

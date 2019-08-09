@@ -12,11 +12,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.test.orabi.teleprompter.R;
 import com.test.orabi.teleprompter.databinding.ActivityDisplayVideoBinding;
 import com.test.orabi.teleprompter.viewmodel.DisplayVidoeViewModel;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 
 public class DisplayVideoActivity extends AppCompatActivity {
 
@@ -24,13 +29,18 @@ public class DisplayVideoActivity extends AppCompatActivity {
     private ActivityDisplayVideoBinding binding;
     private DisplayVidoeViewModel viewModel;
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_display_video);
 
-        viewModel = ViewModelProviders.of(this).get(DisplayVidoeViewModel.class);
+        AndroidInjection.inject(this);
+
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(DisplayVidoeViewModel.class);
 
         Intent intent = getIntent();
         videoPath = intent.getStringExtra("video_path");
@@ -76,7 +86,6 @@ public class DisplayVideoActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }

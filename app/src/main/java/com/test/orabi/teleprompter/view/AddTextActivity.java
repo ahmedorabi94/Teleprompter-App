@@ -16,11 +16,16 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.test.orabi.teleprompter.R;
 import com.test.orabi.teleprompter.databinding.ActivityAddTextBinding;
 import com.test.orabi.teleprompter.viewmodel.AddTextViewModel;
+
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 
 public class AddTextActivity extends AppCompatActivity {
 
@@ -30,6 +35,9 @@ public class AddTextActivity extends AppCompatActivity {
 
     int rowId;
     AddTextViewModel viewModel;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     @SuppressLint("ClickableViewAccessibility")
     private View.OnTouchListener touchListener = (v, event) -> {
@@ -46,7 +54,9 @@ public class AddTextActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_text);
 
-        viewModel = ViewModelProviders.of(this).get(AddTextViewModel.class);
+        AndroidInjection.inject(this);
+
+        viewModel = ViewModelProviders.of(this,viewModelFactory).get(AddTextViewModel.class);
 
         rowId = getIntent().getIntExtra("row_id", -1);
 
