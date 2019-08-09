@@ -5,7 +5,7 @@
  - Data Binding
  - View Models
  - Dagger 2
- - Romm Databse
+ - Room Databse
 
 
 
